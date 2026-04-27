@@ -15,9 +15,11 @@ export default function Home() {
   );
 }
 
+const API_BASE_URL = "http://localhost:5678/api/blogs";
+
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const res = await fetch("http://localhost:5678/api/blogs");
+    const res = await fetch(`${API_BASE_URL}`);
     const blogs = await res.json();
 
     return {
