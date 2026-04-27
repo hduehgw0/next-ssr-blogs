@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import { BlogDetail } from "@/types/BlogDetail";
 
 const API_BASE_URL = "http://localhost:5678/api/blogs";
 
@@ -16,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       throw new Error(`API Error: ${res.status}`);
     }
 
-    const blog = await res.json();
+    const blog: BlogDetail = await res.json();
 
     return {
       props: {
