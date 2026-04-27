@@ -20,6 +20,11 @@ const API_BASE_URL = "http://localhost:5678/api/blogs";
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const res = await fetch(`${API_BASE_URL}`);
+
+    if (!res.ok) {
+      throw new Error(`API Error: ${res.status} ${res.statusText}`);
+    }
+
     const blogs = await res.json();
 
     return {
