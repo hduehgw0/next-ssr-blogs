@@ -1,9 +1,7 @@
+import { BlogInfo } from "@/types/BlogInfo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-type AuthorInfoProps = {
-  userName: string;
-  userImage: string;
-};
+type AuthorInfoProps = Pick<BlogInfo, "userName" | "userImage">;
 
 export const AuthorInfo = ({ userName, userImage }: AuthorInfoProps) => {
   {/* セマンティクスは親で確定する設計にする！ここは再利用性重視で div を採用。*/}
