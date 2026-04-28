@@ -3,6 +3,8 @@ import Head from "next/head";
 import { BlogDetail } from "@/types/BlogDetail";
 import { AuthorInfo } from "@/components/AuthorInfo";
 import { API_BASE_URL } from "@/lib/constants";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function BlogDetailPage({ blog }: { blog: BlogDetail }) {
   return (
@@ -24,10 +26,10 @@ export default function BlogDetailPage({ blog }: { blog: BlogDetail }) {
           </address>
         </header>
 
-        <section className="bg-gray-50 p-6 rounded-md border">
-          <div className="whitespace-pre-wrap text-gray-800">
+        <section className="bg-gray-50 p-6 rounded-md border text-gray-800">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {blog.content}
-          </div>
+          </ReactMarkdown>
         </section>
       </article>
     </>
