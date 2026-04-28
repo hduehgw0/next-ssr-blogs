@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { BlogDetail } from "@/types/BlogDetail";
 import { AuthorInfo } from "@/components/AuthorInfo";
+import { API_BASE_URL } from "@/lib/constants";
 
 export default function BlogDetailPage({ blog }: { blog: BlogDetail }) {
   return (
@@ -32,8 +33,6 @@ export default function BlogDetailPage({ blog }: { blog: BlogDetail }) {
     </>
   );
 }
-
-const API_BASE_URL = "http://localhost:5678/api/blogs";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.id;
