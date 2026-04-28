@@ -37,6 +37,10 @@ export default function BlogDetailPage({ blog }: { blog: BlogDetail }) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.id;
 
+  if (typeof id !== "string") {
+    return { notFound: true };
+  }
+
   try {
     const res = await fetch(`${API_BASE_URL}/${id}`);
 
