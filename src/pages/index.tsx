@@ -12,10 +12,15 @@ export default function Home({ blogs }: { blogs: BlogInfo[] }) {
         <meta name="description" content="記事一覧ページです。" />
       </Head>
 
-      <section className="space-y-4">
-        <h1 className="text-2xl font-bold mb-6">ブログ記事一覧</h1>
+      <section className="max-w-4xl mx-auto" aria-labelledby="blog-list-title">
+        <h1
+          id="blog-list-title"
+          className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8 tracking-tight"
+        >
+          ブログ記事一覧
+        </h1>
 
-        <ul className="space-y-4">
+        <ul className="space-y-4 md:space-y-6">
           {blogs.map((blog) => (
             <li key={blog.id}>
               <BlogCard
