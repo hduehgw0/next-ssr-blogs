@@ -17,16 +17,21 @@ export default function BlogDetailPage({ blog }: { blog: BlogDetail }) {
         />
       </Head>
 
-      <article className="max-w-3xl mx-auto py-8">
+      <article className="max-w-3xl mx-auto">
         <header>
-          <h1 className="text-3xl font-bold mb-6">{blog.title}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 leading-tight tracking-tight text-gray-900">
+            {blog.title}
+          </h1>
 
-          <address className="mb-8">
+          <address className="mb-6 md:mb-8" aria-label="記事の著者情報">
             <AuthorInfo userName={blog.userName} userImage={blog.userImage} />
           </address>
         </header>
 
-        <section className="bg-gray-50 p-6 rounded-md border text-gray-800 prose prose-slate max-w-none">
+        <section
+          className="bg-gray-50 p-4 sm:p-6 md:p-8 rounded-md border text-gray-800 prose prose-base md:prose-lg prose-slate max-w-none break-words"
+          aria-label="記事本文"
+        >
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {blog.content}
           </ReactMarkdown>
