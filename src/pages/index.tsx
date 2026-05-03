@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next";
 import { BlogInfo } from "@/types/BlogInfo";
 import { BlogCard } from "@/components/BlogCard";
 import { API_BASE_URL } from "@/lib/constants";
+import { Button } from "@/components/ui/button";
 import Head from "next/head";
 
 export default function Home({ blogs }: { blogs: BlogInfo[] }) {
@@ -37,6 +38,14 @@ export default function Home({ blogs }: { blogs: BlogInfo[] }) {
             </li>
           ))}
         </ul>
+
+        {visibleCount < blogs.length && (
+          <div className="mt-8 flex justify-center">
+            <Button onClick={() => setVisibleCount((prev) => prev + 10)}>
+              もっと読む
+            </Button>
+          </div>
+        )}
       </section>
     </>
   );
