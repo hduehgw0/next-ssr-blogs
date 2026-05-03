@@ -14,6 +14,10 @@ export default function Home({ blogs }: { blogs: BlogInfo[] }) {
   const [visibleCount, setVisibleCount] = useState<number>(INITIAL_BLOGS_TO_SHOW);
   const visibleBlogs = blogs.slice(0, visibleCount);
 
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + BLOGS_PER_LOAD);
+  };
+
   return (
     <>
       <Head>
@@ -44,7 +48,7 @@ export default function Home({ blogs }: { blogs: BlogInfo[] }) {
 
         {visibleCount < blogs.length && (
           <div className="mt-8 flex justify-center">
-            <Button onClick={() => setVisibleCount((prev) => prev + BLOGS_PER_LOAD)}>
+            <Button onClick={handleLoadMore}>
               もっと読む
             </Button>
           </div>
