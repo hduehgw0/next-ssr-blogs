@@ -6,9 +6,12 @@ import { API_BASE_URL } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import Head from "next/head";
 
+const INITIAL_BLOGS_TO_SHOW = 10;
+const BLOGS_PER_LOAD = 10;
+
 export default function Home({ blogs }: { blogs: BlogInfo[] }) {
 
-  const [visibleCount, setVisibleCount] = useState<number>(10);
+  const [visibleCount, setVisibleCount] = useState<number>(INITIAL_BLOGS_TO_SHOW);
   const visibleBlogs = blogs.slice(0, visibleCount);
 
   return (
@@ -41,7 +44,7 @@ export default function Home({ blogs }: { blogs: BlogInfo[] }) {
 
         {visibleCount < blogs.length && (
           <div className="mt-8 flex justify-center">
-            <Button onClick={() => setVisibleCount((prev) => prev + 10)}>
+            <Button onClick={() => setVisibleCount((prev) => prev + BLOGS_PER_LOAD)}>
               もっと読む
             </Button>
           </div>
