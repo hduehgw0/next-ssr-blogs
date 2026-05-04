@@ -4,6 +4,7 @@ import { BlogInfo } from "@/types/BlogInfo";
 import { BlogCard } from "@/components/BlogCard";
 import { API_BASE_URL } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import Head from "next/head";
 
 const INITIAL_BLOGS_TO_SHOW = 10;
@@ -12,6 +13,9 @@ const BLOGS_PER_LOAD = 10;
 export default function Home({ blogs }: { blogs: BlogInfo[] }) {
 
   const [visibleCount, setVisibleCount] = useState<number>(INITIAL_BLOGS_TO_SHOW);
+
+  const [searchQuery, setSearchQuery] = useState("");
+
   const visibleBlogs = blogs.slice(0, visibleCount);
 
   const handleLoadMore = () => {
@@ -32,6 +36,15 @@ export default function Home({ blogs }: { blogs: BlogInfo[] }) {
         >
           ブログ記事一覧
         </h1>
+
+        <div className="mb-8">
+          <Input
+            type="search"
+            placeholder="記事を検索..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
 
         <ul className="space-y-4 md:space-y-6">
           {visibleBlogs.map((blog) => (
