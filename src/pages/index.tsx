@@ -55,6 +55,7 @@ export default function Home({ blogs }: { blogs: BlogInfo[] }) {
           <Input
             type="search"
             placeholder="記事を検索..."
+            aria-label="記事を検索"
             value={searchQuery}
             onChange={handleSearchChange}
           />
