@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import { Button } from "@/components/ui/button";
+import { Heart } from "lucide-react";
 import { BlogDetail } from "@/types/BlogDetail";
 import { AuthorInfo } from "@/components/AuthorInfo";
 import { API_BASE_URL } from "@/lib/constants";
@@ -37,9 +39,31 @@ export default function BlogDetailPage({ blog }: { blog: BlogDetail }) {
             {blog.title}
           </h1>
 
-          <address className="mb-6 md:mb-8" aria-label="記事の著者情報">
-            <AuthorInfo userName={blog.userName} userImage={blog.userImage} />
-          </address>
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-6 md:mb-8">
+            <address aria-label="記事の著者情報">
+              <AuthorInfo userName={blog.userName} userImage={blog.userImage} />
+            </address>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleToggleLike}
+              aria-pressed={isLiked}
+              aria-label={isLiked ? "いいねを取り消す" : "この記事にいいねする"}
+              className={`flex items-center gap-2 rounded-full px-4 transition-colors duration-200 ${
+                isLiked
+                  ? "border-pink-500 text-pink-500 bg-pink-50 hover:bg-pink-100 hover:text-pink-600"
+                  : "text-gray-500 hover:text-gray-700"
+              }`}
+            >
+              <Heart
+                className={`w-5 h-5 transition-all duration-200 ${
+                  isLiked ? "fill-current scale-110" : "scale-100"
+                }`}
+              />
+              <span className="text-base font-semibold">{likeCount}</span>
+            </Button>
+          </div>
         </header>
 
         <section
