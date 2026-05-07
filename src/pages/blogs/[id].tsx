@@ -11,6 +11,16 @@ export default function BlogDetailPage({ blog }: { blog: BlogDetail }) {
   const [likeCount, setLikeCount] = useState<number>(0);
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
+  const handleToggleLike = () => {
+    if (isLiked) {
+      setLikeCount((prev) => prev - 1);
+      setIsLiked(false);
+    } else {
+      setLikeCount((prev) => prev + 1);
+      setIsLiked(true);
+    }
+  };
+
   return (
     <>
       <Head>
