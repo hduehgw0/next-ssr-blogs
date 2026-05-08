@@ -4,6 +4,14 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { z } from "zod";
+
+const blogSchema = z.object({
+  title: z.string().min(1, "タイトルは必須です"),
+  content: z.string().min(1, "本文は必須です"),
+  userName: z.string().min(1, "投稿者名は必須です"),
+  userImage: z.url("正しいURL形式で入力してください"),
+});
 
 export default function CreateBlogPage() {
   const [formData, setFormData] = useState({
