@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -89,8 +91,15 @@ export default function CreateBlogPage() {
               プレビュー
             </h2>
             <div className="prose prose-slate max-w-none break-words">
-              <h1>ここにタイトルがプレビューされます</h1>
-              <p>ここに本文がプレビューされます</p>
+              <h1>{formData.title || "ここにタイトルがプレビューされます"}</h1>
+
+              {formData.content ? (
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {formData.content}
+                </ReactMarkdown>
+              ) : (
+                <p>ここに本文がプレビューされます</p>
+              )}
             </div>
           </section>
         </div>
