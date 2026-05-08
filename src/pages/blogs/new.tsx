@@ -1,8 +1,23 @@
+import { useState } from "react";
 import Head from "next/head";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export default function CreateBlogPage() {
+  const [formData, setFormData] = useState({
+    title: "",
+    userName: "",
+    userImage: "",
+    content: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
     <>
       <Head>
@@ -15,23 +30,53 @@ export default function CreateBlogPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <form className="space-y-6 flex flex-col">
             <div>
-              <label htmlFor="title" className="sr-only">記事のタイトル</label>
-              <Input id="title" placeholder="記事のタイトル" className="text-lg font-bold" />
+              <label htmlFor="title" className="sr-only">
+                記事のタイトル
+              </label>
+              <Input
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                placeholder="記事のタイトル"
+                className="text-lg font-bold"
+              />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="author" className="sr-only">投稿者名</label>
-                <Input id="author" placeholder="投稿者名" />
+                <label htmlFor="userName" className="sr-only">
+                  投稿者名
+                </label>
+                <Input
+                  id="userName"
+                  name="userName"
+                  value={formData.userName}
+                  onChange={handleChange}
+                  placeholder="投稿者名"
+                />
               </div>
               <div>
-                <label htmlFor="profileImage" className="sr-only">プロフィール画像URL</label>
-                <Input id="profileImage" placeholder="プロフィール画像URL" />
+                <label htmlFor="userImage" className="sr-only">
+                  プロフィール画像URL
+                </label>
+                <Input
+                  id="userImage"
+                  name="userImage"
+                  value={formData.userImage}
+                  onChange={handleChange}
+                  placeholder="プロフィール画像URL"
+                />
               </div>
             </div>
             <div className="flex-grow flex flex-col">
-              <label htmlFor="content" className="sr-only">本文</label>
+              <label htmlFor="content" className="sr-only">
+                本文
+              </label>
               <textarea
                 id="content"
+                name="content"
+                value={formData.content}
+                onChange={handleChange}
                 placeholder="マークダウンで本文を記述..."
                 className="flex-grow min-h-[400px] w-full p-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y"
               />
