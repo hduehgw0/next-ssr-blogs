@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,8 @@ type FormErrors = {
 };
 
 export default function CreateBlogPage() {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     title: "",
     userName: "",
@@ -69,7 +72,7 @@ export default function CreateBlogPage() {
         throw new Error("投稿に失敗しました");
       }
 
-      console.log("POSTリクエスト成功！");
+      router.push("/");
     } catch (error) {
       console.error(error);
       alert("エラーが発生しました。時間をおいて再度お試しください。");
