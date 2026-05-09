@@ -20,9 +20,21 @@ export default function BlogDetailPage({ blog }: { blog: BlogDetail }) {
 
       <article className="max-w-3xl mx-auto">
         <header>
-          <h1 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 leading-tight tracking-tight text-gray-900">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight tracking-tight text-gray-900">
             {blog.title}
           </h1>
+
+          <time
+            dateTime={blog.createdAt}
+            className="block text-sm text-gray-500 mb-6"
+          >
+            {new Date(blog.createdAt).toLocaleDateString("ja-JP", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}{" "}
+            に投稿
+          </time>
 
           <div className="flex flex-wrap items-center justify-between gap-4 mb-6 md:mb-8">
             <address aria-label="記事の著者情報">
