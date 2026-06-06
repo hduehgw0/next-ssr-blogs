@@ -1,0 +1,20 @@
+import { BlogInfo } from "@/types/BlogInfo";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+type AuthorInfoProps = Pick<BlogInfo, "userName" | "userImage">;
+
+export const AuthorInfo = ({ userName, userImage }: AuthorInfoProps) => {
+  {/* セマンティクスは親で確定する設計にする！ここは再利用性重視で div を採用。*/}
+  return (
+    <div className="flex items-center space-x-3">
+      <Avatar>
+        <AvatarImage src={userImage} alt={userName} />
+        <AvatarFallback>
+          {/* userNameが空文字の場合は '?' などを出し、存在する場合は大文字にして返す */}
+          {userName ? userName.charAt(0).toUpperCase() : "?"}
+        </AvatarFallback>
+      </Avatar>
+      <span className="text-sm font-medium text-gray-700">{userName}</span>
+    </div>
+  );
+};
