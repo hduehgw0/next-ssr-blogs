@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import { BlogInfo } from "@/types/BlogInfo";
 import { BlogCard } from "@/components/BlogCard";
+import { API_BASE_URL } from "@/lib/constants";
 import Head from "next/head";
 
 export default function Home({ blogs }: { blogs: BlogInfo[] }) {
@@ -30,8 +31,6 @@ export default function Home({ blogs }: { blogs: BlogInfo[] }) {
     </>
   );
 }
-
-const API_BASE_URL = "http://localhost:5678/api/blogs";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
