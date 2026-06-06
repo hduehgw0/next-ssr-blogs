@@ -4,6 +4,7 @@ import { BlogInfo } from "@/types/BlogInfo";
 import { BlogCard } from "@/components/BlogCard";
 import { API_BASE_URL } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import Head from "next/head";
 
 const INITIAL_BLOGS_TO_SHOW = 10;
@@ -12,7 +13,24 @@ const BLOGS_PER_LOAD = 10;
 export default function Home({ blogs }: { blogs: BlogInfo[] }) {
 
   const [visibleCount, setVisibleCount] = useState<number>(INITIAL_BLOGS_TO_SHOW);
-  const visibleBlogs = blogs.slice(0, visibleCount);
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    setVisibleCount(INITIAL_BLOGS_TO_SHOW);
+  };
+
+  const filteredBlogs = blogs.filter((blog) => {
+    const lowerQuery = searchQuery.trim().toLowerCase();
+
+    if (!lowerQuery) return true;
+
+    return blog.title.toLowerCase().includes(lowerQuery);
+  });
+
+  const visibleBlogs = filteredBlogs.slice(0, visibleCount);
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + BLOGS_PER_LOAD);
@@ -33,20 +51,36 @@ export default function Home({ blogs }: { blogs: BlogInfo[] }) {
           ブログ記事一覧
         </h1>
 
-        <ul className="space-y-4 md:space-y-6">
-          {visibleBlogs.map((blog) => (
-            <li key={blog.id}>
-              <BlogCard
-                id={blog.id}
-                title={blog.title}
-                userName={blog.userName}
-                userImage={blog.userImage}
-              />
-            </li>
-          ))}
-        </ul>
+        <div className="mb-8">
+          <Input
+            type="search"
+            placeholder="記事を検索..."
+            aria-label="記事を検索"
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+        </div>
 
-        {visibleCount < blogs.length && (
+        {filteredBlogs.length === 0 ? (
+          <p className="text-center text-gray-500 py-10" role="status">
+            「{searchQuery}」に一致する記事は見つかりませんでした。
+          </p>
+        ) : (
+          <ul className="space-y-4 md:space-y-6">
+            {visibleBlogs.map((blog) => (
+              <li key={blog.id}>
+                <BlogCard
+                  id={blog.id}
+                  title={blog.title}
+                  userName={blog.userName}
+                  userImage={blog.userImage}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {visibleCount < filteredBlogs.length && (
           <div className="mt-8 flex justify-center">
             <Button
               variant="outline"
