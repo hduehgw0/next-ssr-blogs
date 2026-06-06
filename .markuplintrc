@@ -1,0 +1,7 @@
+{
+  "extends": ["markuplint:recommended"],
+  "rules": {
+    "class-naming": "/^[a-z][a-z0-9-]*$/",
+    "id-naming": "/^[a-z][a-z0-9-]*$/"
+  }
+}

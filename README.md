@@ -1,40 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# next-ssr-blog-2
 
-## Getting Started
+アルゴ式 BootCamp 「Next.js① SSR」セクションで作成する、SSR（サーバーサイドレンダリング）を最大限に活用した Qiita ライクなブログサイトです。
 
-First, run the development server:
+## プロジェクトの目的
+
+このプロジェクトは、Next.js (Pages Router) を用いて、サーバー側でデータを取得し、動的なコンテンツを高速に表示する **SSR (Server Side Rendering)** の仕組みを深く理解することを目的としています。
+
+### 学習・実装の焦点
+- **Pages Router** による動的ルーティングの管理
+- `getServerSideProps` を用いたサーバーサイドでのデータフェッチ
+- **shadcn/ui** と **Tailwind CSS** を用いたセマンティックなUI実装
+- `react-markdown` による Markdown コンテンツのレンダリング
+- APIサーバーとの連携
+
+## 技術スタック
+
+- **Frontend**: Next.js (Pages Router), TypeScript
+- **Styling**: Tailwind CSS, shadcn/ui
+- **Markdown**: react-markdown, remark-gfm (GitHub Flavored Markdown)
+
+### 主要なエンドポイント
+
+| メソッド | パス | 説明 | 備考 |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/blogs` | 記事一覧を取得 | SSRで取得しリスト表示に使用 |
+| `GET` | `/blogs/{id}` | 特定の記事の詳細を取得 | 動的ルーティングで使用 |
+
+## 開発環境のセットアップ
+
+### 1. バックエンドの起動 (Docker)
+APIリポジトリ（https://github.com/sak-swe-bootcamp/next-js-task-api ）にアクセスし、クローンをしてDockerコンテナを起動します。
+
+### 2. フロントエンドの起動
+プロジェクトのルートディレクトリで以下のコマンドを実行してください。
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
+起動後、 http://localhost:3000 にアクセスしてください。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.

@@ -1,0 +1,31 @@
+{
+  // 1. インデントの設定（スペース2つ）
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+
+  // 2. 保存時の自動整形（Prettier & Stylelint）
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": "explicit"
+  },
+
+  // 3. デフォルトのフォーマッターをPrettierに指定
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // 4. 末尾のスペース除去と最終行の改行
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // 5. 言語ごとの個別設定
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "stylelint.validate": ["css"]
+  },
+  
+  // 6. Tailwind系 at-rule の警告を抑制
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore"
+}

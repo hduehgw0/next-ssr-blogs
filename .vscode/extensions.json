@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",       // JS/TS用
+    "markuplint.vscode-markuplint", // HTML用
+    "stylelint.vscode-stylelint"    // CSS用
+  ]
+}
